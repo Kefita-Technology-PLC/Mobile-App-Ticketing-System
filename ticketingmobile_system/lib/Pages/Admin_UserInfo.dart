@@ -36,12 +36,9 @@ class _LocalStoragePageState extends State<LocalStoragePage> {
     for (var i = 0; i < userBox.length; i++) {
       final value = userBox.getAt(i) as Map<dynamic, dynamic>;
 
-      final phoneNo =
-          value['phone_no'] as String? ?? ''; 
-      final password =
-          value['password'] as String? ?? ''; 
-      final isAdmin =
-          value['isAdmin'] as bool? ?? false; 
+      final phoneNo = value['phone_no'] as String? ?? '';
+      final password = value['password'] as String? ?? '';
+      final isAdmin = value['isAdmin'] as bool? ?? false;
 
       users.add({
         'phone_no': phoneNo,
@@ -50,57 +47,6 @@ class _LocalStoragePageState extends State<LocalStoragePage> {
       });
     }
     return users;
-  }
-
-  Future<void> _upsertUser(Box userBox, Map<String, dynamic> user) async {
-    final phoneNo = user['phone_no'];
-
-    final userIndex = userBox.values.toList().indexWhere(
-        (existingUser) => (existingUser as Map)['phone_no'] == phoneNo);
-
-    if (userIndex != -1) {
-      await userBox.putAt(userIndex, user); 
-    } else {
-      await userBox.add(user); 
-    }
-  }
-
-  Future<void> _deleteUser(Box userBox, String phoneNo) async {
-    final userIndex = userBox.values
-        .toList()
-        .indexWhere((user) => (user as Map)['phone_no'] == phoneNo);
-    if (userIndex != -1) {
-      await userBox.deleteAt(userIndex);
-    }
-  }
-
-  Future<void> _showDeleteConfirmationDialog(
-      Box userBox, String phoneNo) async {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('Confirm Deletion'),
-          content: Text('Are you sure you want to delete this user?'),
-          actions: <Widget>[
-            TextButton(
-              child: Text('Cancel'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-            TextButton(
-              child: Text('Delete'),
-              onPressed: () async {
-                await _deleteUser(userBox, phoneNo);
-                Navigator.of(context).pop();
-                setState(() {}); 
-              },
-            ),
-          ],
-        );
-      },
-    );
   }
 
   @override
@@ -192,10 +138,8 @@ class _LocalStoragePageState extends State<LocalStoragePage> {
                               itemCount: users.length,
                               itemBuilder: (context, index) {
                                 final user = users[index];
-                                final phoneNo =
-                                    user['phone_no'] ?? ''; 
-                                final isAdmin =
-                                    user['isAdmin'] ?? false; 
+                                final phoneNo = user['phone_no'] ?? '';
+                                final isAdmin = user['isAdmin'] ?? false;
 
                                 return Padding(
                                   padding: const EdgeInsets.all(8.0),
@@ -237,20 +181,12 @@ class _LocalStoragePageState extends State<LocalStoragePage> {
                                           ),
                                           SizedBox(height: 5),
                                           Text(
-                                            'Password (Hash): ${user['password'] ?? ''}', 
+                                            'Password (Hash): ${user['password'] ?? ''}',
                                             style:
                                                 TextStyle(color: Colors.grey),
                                             overflow: TextOverflow.ellipsis,
                                           ),
                                         ],
-                                      ),
-                                      trailing: IconButton(
-                                        icon: Icon(Icons.delete,
-                                            color: Colors.red),
-                                        onPressed: () {
-                                          _showDeleteConfirmationDialog(
-                                              userBox, phoneNo);
-                                        },
                                       ),
                                     ),
                                   ),

@@ -348,15 +348,13 @@ class _TicketingHistoryState extends State<TicketingHistory> {
                                                 150), // Deployment
                                             7: FixedColumnWidth(150), // Sale
                                             8: FixedColumnWidth(150), // Revenue
-                                            9: FixedColumnWidth(
-                                                100), // Action (Delete)
                                           },
                                           children: [
                                             TableRow(
                                               decoration: const BoxDecoration(
                                                   color: Color(0XFF587DB4)),
                                               children: List.generate(
-                                                10,
+                                                9,
                                                 (index) => Padding(
                                                   padding:
                                                       const EdgeInsets.all(8.0),
@@ -370,8 +368,7 @@ class _TicketingHistoryState extends State<TicketingHistory> {
                                                       'Vehicle-Code',
                                                       'Ticket-Count',
                                                       'Sale',
-                                                      'Revenue',
-                                                      'Action'
+                                                      'Revenue'
                                                     ][index],
                                                     style: const TextStyle(
                                                       fontSize: 16,
@@ -394,7 +391,7 @@ class _TicketingHistoryState extends State<TicketingHistory> {
                                                       : Colors.grey.shade200,
                                                 ),
                                                 children:
-                                                    List.generate(10, (index) {
+                                                    List.generate(9, (index) {
                                                   final report = entry.value[i];
                                                   switch (index) {
                                                     case 0:
@@ -534,16 +531,6 @@ class _TicketingHistoryState extends State<TicketingHistory> {
                                                               TextAlign.center,
                                                         ),
                                                       );
-                                                    case 9:
-                                                      return IconButton(
-                                                        icon: const Icon(
-                                                            Icons.delete,
-                                                            color: Colors.red),
-                                                        onPressed: () {
-                                                          _deleteReport(entry
-                                                              .value[i]['key']);
-                                                        },
-                                                      );
                                                     default:
                                                       return Container();
                                                   }
@@ -568,29 +555,29 @@ class _TicketingHistoryState extends State<TicketingHistory> {
                                                   ),
                                                 ),
                                                 const Padding(
-                                                  padding: EdgeInsets.all(8.0),
-                                                  child: Text(''),
-                                                ),
+                                                    padding:
+                                                        EdgeInsets.all(8.0),
+                                                    child: Text('')),
                                                 const Padding(
-                                                  padding: EdgeInsets.all(8.0),
-                                                  child: Text(''),
-                                                ),
+                                                    padding:
+                                                        EdgeInsets.all(8.0),
+                                                    child: Text('')),
                                                 const Padding(
-                                                  padding: EdgeInsets.all(8.0),
-                                                  child: Text(''),
-                                                ),
+                                                    padding:
+                                                        EdgeInsets.all(8.0),
+                                                    child: Text('')),
                                                 const Padding(
-                                                  padding: EdgeInsets.all(8.0),
-                                                  child: Text(''),
-                                                ),
+                                                    padding:
+                                                        EdgeInsets.all(8.0),
+                                                    child: Text('')),
                                                 const Padding(
-                                                  padding: EdgeInsets.all(8.0),
-                                                  child: Text(''),
-                                                ),
+                                                    padding:
+                                                        EdgeInsets.all(8.0),
+                                                    child: Text('')),
                                                 const Padding(
-                                                  padding: EdgeInsets.all(8.0),
-                                                  child: Text(''),
-                                                ),
+                                                    padding:
+                                                        EdgeInsets.all(8.0),
+                                                    child: Text('')),
                                                 Padding(
                                                   padding:
                                                       const EdgeInsets.all(8.0),
@@ -636,10 +623,6 @@ class _TicketingHistoryState extends State<TicketingHistory> {
                                                     ),
                                                     textAlign: TextAlign.center,
                                                   ),
-                                                ),
-                                                const Padding(
-                                                  padding: EdgeInsets.all(8.0),
-                                                  child: Text(''),
                                                 ),
                                               ],
                                             ),

@@ -40,39 +40,6 @@ class _StoredDatasState extends State<StoredDatas> {
     });
   }
 
-  Future<void> _deleteVehicle(String key) async {
-    final vehicleBox = await Hive.openBox('vehicles');
-    await vehicleBox.delete(key);
-    _loadStoredVehicles();
-  }
-
-  void _showDeleteConfirmationDialog(String key) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('Delete Vehicle'),
-          content: Text('Are you sure you want to delete this vehicle data?'),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: Text('Cancel'),
-            ),
-            TextButton(
-              onPressed: () {
-                _deleteVehicle(key);
-                Navigator.of(context).pop();
-              },
-              child: Text('Delete'),
-            ),
-          ],
-        );
-      },
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -82,7 +49,7 @@ class _StoredDatasState extends State<StoredDatas> {
             ReusableBackground(),
             ReusableLogo(),
             Positioned(
-              top: 100, 
+              top: 100,
               left: 0,
               right: 0,
               child: Padding(
@@ -147,7 +114,7 @@ class _StoredDatasState extends State<StoredDatas> {
               ),
             ),
             Positioned(
-              top: 250, 
+              top: 250,
               left: 0,
               right: 0,
               bottom: 0,
@@ -159,9 +126,7 @@ class _StoredDatasState extends State<StoredDatas> {
                         itemCount: storedVehicles.length,
                         itemBuilder: (context, index) {
                           final vehicle = storedVehicles[index];
-                          final String key =
-                              '${vehicle['plateNumber']}-${vehicle['regionCode']}-${vehicle['vehicleCode']}';
-                
+
                           return Card(
                             elevation: 3,
                             margin: EdgeInsets.symmetric(vertical: 8),
@@ -173,15 +138,10 @@ class _StoredDatasState extends State<StoredDatas> {
                               subtitle: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text('Vehicle Code: ${vehicle['vehicleCode']}'),
+                                  Text(
+                                      'Vehicle Code: ${vehicle['vehicleCode']}'),
                                   Text('Price: ${vehicle['price']}'),
                                 ],
-                              ),
-                              trailing: IconButton(
-                                icon: Icon(Icons.delete, color: Colors.red),
-                                onPressed: () {
-                                  _showDeleteConfirmationDialog(key);
-                                },
                               ),
                             ),
                           );
